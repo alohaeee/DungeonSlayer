@@ -1,0 +1,33 @@
+#ifndef VIEW_H
+#define VIEW_H
+
+#include <iterator>
+
+#include "storage.h"
+#include "registry.h"
+
+namespace ssecs
+{
+namespace ecs
+{
+template<typename Entity, typename...Components>
+class view
+{
+    friend class registry<Entity>;
+    
+    template<typename Comp>
+    using pool_type = std::conditional_t<std::is_const_v<Comp>, const storage<Entity, std::remove_const_t<Comp>>, storage<Entity, Comp>>;
+    class iterator
+    {
+    public:
+        using iterator_category = std::random_access_iterator_tag;
+        using value_type        = Components;
+        using difference_type   = std::int32_t;
+        using pointer           = std::conditional_t<Const, const value_type *, value_type *>;
+        using reference         = std::conditional_t<Const, const value_type &, value_type &>;
+    };
+};
+}
+}
+
+#endif // VIEW_H
