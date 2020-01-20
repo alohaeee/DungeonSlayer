@@ -40,12 +40,13 @@ void CollisionDetection()
 
                                 auto test0 = activeCamera.FromWorldToScreenRect(world_tile);
 
-                                sdl::Graphics::SetDrawColor(0, 255, 0, 255);
-                                sdl::Graphics::DrawRectToLayerF(4, &test0);
-                                sdl::Graphics::SetDrawColor(255, 255, 0, 255);
-                                auto test = activeCamera.FromWorldToScreenRect(world_rect);
-                                sdl::Graphics::DrawRectToLayerF(4, &test);
-                                sdl::Graphics::ResetDrawColor();
+                                //                                sdl::Graphics::SetDrawColor(0, 255, 0, 255);
+                                //                                sdl::Graphics::DrawRectToLayerF(4, &test0);
+                                //                                sdl::Graphics::SetDrawColor(255, 255, 0, 255);
+                                //                                auto test =
+                                //                                activeCamera.FromWorldToScreenRect(world_rect);
+                                //                                sdl::Graphics::DrawRectToLayerF(4, &test);
+                                //                                sdl::Graphics::ResetDrawColor();
                             }
                         }
 

@@ -10,33 +10,41 @@ void GridRender()
 
     activeCamera.UpdateWindowSize(sdl::Graphics::Window());
     gridView.each([activeCamera](const auto &grid, const auto &position) {
-        auto screenPosition = activeCamera.FromWorldToScreenView({position.position.x(), position.position.y()});
-        SDL_Rect screenRect;
-        screenRect.w = static_cast<int>(std::round(grid.tileSet->TileWidth() * grid.scale.x()));
-        screenRect.h = static_cast<int>(std::round(grid.tileSet->TileHeight() * grid.scale.y()));
+        SDL_FRect world_tile{position.position.x(), position.position.y(), grid.tileSet->TileWidth() * grid.scale.x(),
+                             grid.tileSet->TileHeight() * grid.scale.y()};
+        auto screenRect = activeCamera.FromWorldToScreenRect(world_tile);
+        SDL_Rect screenPosition = {screenRect.x, screenRect.y};
 
         int j = grid.cell.size();
         for (const auto &row : grid.cell)
         {
             int i = 0;
-            screenRect.y = static_cast<int>(screenPosition.y() - screenRect.h * j);
+            screenRect.y = static_cast<int>(screenPosition.y - screenRect.h * j);
             for (const auto &id : row)
             {
-                if (id != 0)
+                if (id)
                 {
-                    screenRect.x = static_cast<int>(screenPosition.x() + screenRect.w * i);
+
+                    screenRect.x = static_cast<int>(screenPosition.x + screenRect.w * i);
                     if (activeCamera.Contains(screenRect))
                     {
-
                         sdl::Graphics::RenderToLayer(grid.layer, grid.tileSet->Texture(), &(*grid.tileSet)[id - 1],
                                                      &screenRect);
-                        if (TileGrid::hasDebugDraw)
-                        {
-                            sdl::Graphics::SetDrawColor(0, 0, 255, 255);
-                            sdl::Graphics::DrawRectToLayer(6, &screenRect);
-                            sdl::Graphics::ResetDrawColor();
-                        }
                     }
+
+                    //                    if (activeCamera.Contains(screenRect))
+                    //                    {
+
+                    //                        sdl::Graphics::RenderToLayer(grid.layer, grid.tileSet->Texture(),
+                    //                        &(*grid.tileSet)[id - 1],
+                    //                                                     &screenRect);
+                    //                        if (TileGrid::hasDebugDraw)
+                    //                        {
+                    //                            sdl::Graphics::SetDrawColor(0, 0, 255, 255);
+                    //                            sdl::Graphics::DrawRectToLayer(6, &screenRect);
+                    //                            sdl::Graphics::ResetDrawColor();
+                    //                        }
+                    //                    }
                 }
                 i++;
             }

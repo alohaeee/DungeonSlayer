@@ -34,13 +34,14 @@ public:
             -std::round(((point.y() - (position.y() + viewRadius.y())) * m_windowHeight) / (2 * viewRadius.y()))};
         return screen;
     }
-    const SDL_FRect FromWorldToScreenRect(const SDL_FRect &rect)
+    const SDL_Rect FromWorldToScreenRect(const SDL_FRect &rect) const
     {
         Vector2D left_up = FromWorldToScreenView({rect.x, rect.y + rect.h});
         //        Vector2D right_down = FromWorldToScreenView({rect.x+rect.w, rect.y});
         //        return {left_up.x(),left_up.y(), right_down.x() - left_up.x(), right_down.y() - right_down.x()};
-        return {left_up.x(), left_up.y(), rect.w * m_windowWidth / (2 * viewRadius.x()),
-                rect.h * m_windowHeight / (2 * viewRadius.y())};
+        return {static_cast<int>(std::round(left_up.x())), static_cast<int>(std::round(left_up.y())),
+                static_cast<int>(std::round(rect.w * m_windowWidth / (2 * viewRadius.x()))),
+                static_cast<int>(std::round(rect.h * m_windowHeight / (2 * viewRadius.y())))};
     }
 
     void UpdateWindowSize(SDL_Window *window) noexcept

@@ -7,7 +7,7 @@ void CameraCreate()
     auto id = registry.create();
     auto &camera = registry.assign<Camera>(id);
     camera.position = {500, 500};
-    camera.viewRadius = {500, 500};
+    camera.viewRadius = {250, 250};
     camera.UpdateWindowSize(sdl::Graphics::Window());
 }
 
