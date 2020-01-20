@@ -1,9 +1,12 @@
 #ifndef SDL_HPP
 #define SDL_HPP
 
-#include "core_data.hpp"
-#include "game_engine.hpp"
-#include "loop_process.hpp"
+#include "events.hpp"
+#include "framerate.hpp"
+#include "game.hpp"
+#include "graphics.hpp"
+#include "instances.hpp"
+#include "scene.hpp"
 #include "texture_loader.hpp"
 #include "timer.hpp"
 

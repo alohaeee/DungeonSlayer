@@ -17,4 +17,8 @@
 #define SDL_THROW(...) ((void)0)
 #endif
 
+#ifndef SDL_RENDER_LAYERS
+#define SDL_RENDER_LAYERS 10
+#endif
+
 #endif // SDL_CONFIG_HPP

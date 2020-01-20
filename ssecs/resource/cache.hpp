@@ -1,6 +1,7 @@
 #ifndef CACHE_HPP
 #define CACHE_HPP
 
+#include "../ecs/config.h"
 #include <array>
 #include <cassert>
 #include <functional>
@@ -15,14 +16,15 @@ namespace ssecs::resource
  * @tparam Resourcs Resource type.
  * @tparam Eraser Function invokable with erasing.
  */
-template <typename Resource, void (*Eraser)(Resource *) = nullptr>
+template <typename Resource, void (*Eraser)(Resource) = nullptr>
 class cache
 {
+
 public:
     /*! @brief Unsigned integer type. */
     using size_type = std::size_t;
     /*! @brief Type of resources managed by a cache. */
-    using resource_type = std::decay_t<Resource> *;
+    using resource_type = Resource;
     /*! @brief Unique identifier type for resources. */
     using id_type = std::string;
     /*! @brief Erase function type. */
@@ -67,10 +69,15 @@ public:
     /*! @brief Reset cache */
     void reset()
     {
-        for (auto &&[id, resource] : m_resources)
+        if constexpr (Eraser)
         {
-            erase(id);
+            for (auto &[id, resource] : m_resources)
+            {
+                Eraser(resource);
+            }
         }
+
+        m_resources.clear();
     }
 
     /**
@@ -80,14 +87,13 @@ public:
      * @param instance Valid resource.
      * @return Loaded in cache resource.
      */
-    resource_type load(id_type id, resource_type instance)
+    resource_type load(const id_type id, resource_type instance)
     {
         if (has(id))
         {
             erase(id);
         }
-
-        return m_resources.insert(id, instance).second().get();
+        return m_resources.emplace(id, instance).first->second;
     }
 
     /**
@@ -96,9 +102,9 @@ public:
      * @param id Valid id type.
      * @return Resource in success.
      */
-    resource_type resource(id_type id)
+    resource_type resource(const id_type id)
     {
-        return m_resources.at(id).second().get();
+        return m_resources.at(id);
     }
 
     /**
@@ -106,7 +112,7 @@ public:
      * @param id Valid id type.
      * @return True if exist, otherwise false.
      */
-    bool has(id_type id)
+    bool has(const id_type id) const noexcept
     {
         return (m_resources.find(id) != m_resources.end());
     }
@@ -117,15 +123,16 @@ public:
      */
     void erase(id_type id)
     {
-        auto s = m_resources.erase(id);
         if constexpr (Eraser)
         {
-            std::invoke(Eraser, s);
+            auto resource = m_resources.at(id);
+            Eraser(resource);
         }
+        m_resources.erase(id);
     }
 
 private:
-    std::map<id_type, std::shared_ptr<std::decay_t<Resource>>> m_resources;
+    std::map<id_type, resource_type> m_resources;
 };
 } // namespace ssecs::resource
 

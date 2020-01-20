@@ -1,0 +1,127 @@
+#ifndef GRAPHIC_HPP
+#define GRAPHIC_HPP
+
+#include <array>
+#include <utility>
+
+#include <SDL_render.h>
+
+#include "config.hpp"
+
+class GameInstance;
+
+namespace ssecs::sdl
+{
+class Graphics
+{
+    friend GameInstance;
+
+    static constexpr const auto reset_layer = std::numeric_limits<std::size_t>::max();
+
+private:
+    Graphics()
+    {
+    }
+    void CreateLayers()
+    {
+        auto [w, h] = WindowSize();
+        for (auto &layer : layers)
+        {
+            layer = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, w, h);
+            if (!layer)
+            {
+                SDL_THROW();
+            }
+            SDL_SetTextureBlendMode(layer, SDL_BLENDMODE_BLEND);
+        }
+    }
+
+    void DestroyLayers()
+    {
+        for (auto &layer : layers)
+        {
+            if (layer)
+            {
+                SDL_DestroyTexture(layer);
+            }
+        }
+    }
+    void OnRenderStart()
+    {
+        // clear all layers textures.
+        for (auto &layer : layers)
+        {
+            if (SDL_SetRenderTarget(renderer, layer))
+            {
+                SDL_THROW();
+            }
+            TargetClear();
+        }
+        // reset renderer
+        ResetRenderer();
+
+        currentLayer = reset_layer;
+    }
+    void RenderTarget(std::size_t layer)
+    {
+        if (SDL_SetRenderTarget(renderer, layers.at(layer)))
+        {
+            SDL_THROW();
+        }
+        currentLayer = layer;
+    }
+    
+    void ResetRenderer()
+    {
+        SDL_SetRenderTarget(renderer, nullptr);
+    }
+    void TargetClear()
+    {
+        SDL_RenderClear(renderer);
+    }
+    
+    void RenderPresent()
+    {
+        SDL_RenderPresent(renderer);
+    }
+    void DrawLayers
+    {
+        
+    }
+
+public:
+    ~Graphics()
+    {
+        DestroyLayers();
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+    }
+    std::pair<int, int> WindowSize()
+    {
+        int w, h;
+        SDL_GetWindowSize(window, &w, &h);
+        return std::make_pair(w, h);
+    }
+    void RenderToLayer(std::size_t layer, SDL_Texture *texture, const SDL_Rect *src_rect = nullptr,
+                       const SDL_Rect *dst_rect = nullptr)
+    {
+        if (layer != currentLayer)
+        {
+            RenderTarget(layer);
+        }
+        if (SDL_RenderCopy(renderer, texture, src_rect, dst_rect))
+        {
+            SDL_THROW();
+        }
+    }
+
+private:
+    SDL_Window *window = nullptr;
+    SDL_Renderer *renderer = nullptr;
+    std::array<SDL_Texture *, SDL_RENDER_LAYERS> layers{};
+    std::size_t currentLayer = reset_layer;
+};
+
+} // namespace ssecs::sdl
+
+#endif // GRAPHIC_HPP

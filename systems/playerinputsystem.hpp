@@ -1,0 +1,6 @@
+#ifndef PLAYERINPUTSYSTEM_HPP
+#define PLAYERINPUTSYSTEM_HPP
+
+void PlayerMovement();
+
+#endif // PLAYERINPUTSYSTEM_HPP

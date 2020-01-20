@@ -14,14 +14,11 @@ namespace ssecs::sdl
  * * InputUpdate();
  * * Render();
  */
-class LoopProcess
+class BasicScene
 {
 public:
-    virtual ~LoopProcess() = default;
+    virtual ~BasicScene() = default;
 
-    virtual void Initialization()
-    {
-    }
     virtual void FixedUpdate()
     {
     }

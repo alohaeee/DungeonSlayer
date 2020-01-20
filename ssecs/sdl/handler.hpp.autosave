@@ -1,0 +1,25 @@
+#ifndef GAMEHANDLER_HPP
+#define GAMEHANDLER_HPP
+
+namespace  
+{
+
+
+namespace
+{
+class Handler
+{
+    friend GameInstance;
+public:
+    GameInstance *GetGameInstance();
+    GameInstance *CreateGameInstance();
+    void DestroyGameInstance();
+private:
+    GameInstance
+    
+};
+}
+}
+
+
+#endif // GAMEHANDLER_HPP

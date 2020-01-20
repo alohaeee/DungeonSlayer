@@ -1,5 +1,5 @@
-#ifndef UTILITY_HPP
-#define UTILITY_HPP
+#ifndef ECS_UTILITY_HPP
+#define ECS_UTILITY_HPP
 
 #include "type_traits.hpp"
 
@@ -23,4 +23,4 @@ template <typename... Type>
 [[maybe_unused]] constexpr exclude_t<Type...> exclude{};
 } // namespace ssecs::ecs
 
-#endif // UTILITY_HPP
+#endif // ECS_UTILITY_HPP

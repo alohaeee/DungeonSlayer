@@ -1,0 +1,78 @@
+#include "game_instance.hpp"
+
+#include "config.hpp"
+
+
+namespace ssecs::sdl
+{
+
+GameHandler* gameInstance = nullptr;
+namespace 
+{
+    Handler handler;
+}
+
+void CreateGameInstance()
+{
+    if(gameInstance)
+    {
+        FAST_THROW("Try to create one more instance of GameEngine");
+    }
+    gameInstance = new GameHandler();
+}
+
+void InitializationSubsystems()
+{
+    if(gameInstance->hadInitialization)
+    {
+        return;
+    }
+    if (SDL_Init(SDL_INIT_EVERYTHING) == -1 || TTF_Init() == -1 || IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG) == 0)
+    {
+        SDL_THROW();
+    }
+    gameInstance->hadInitialization = true;
+}
+
+
+
+void DestroyGameInstance()
+{
+   if(gameInstance)
+   {
+       
+       
+       
+       delete gameInstance;
+   }
+}
+
+void AssignWindow(SDL_Window *window, const Uint32 rendererFlags)
+{
+//    CoreData::s_window = window;
+//    Valid();
+
+//    CoreData::s_renderer = SDL_CreateRenderer(CoreData::s_window, -1, rendererFlags);
+//    if (!CoreData::s_renderer)
+//    {
+//        SDL_THROW();
+//    }
+//    if (SDL_RenderTargetSupported(CoreData::s_renderer) == SDL_FALSE)
+//    {
+//        SDL_THROW();
+//    }
+//    SDL_SetRenderDrawColor(CoreData::s_renderer, 0, 0, 0, SDL_ALPHA_TRANSPARENT);
+//    // std::fill(CoreData::s_layers.begin(), CoreData::s_layers.end(), nullptr);
+//    CreateLayers();
+}
+
+Graphics *Graphics()
+{
+    return gameInstance->graphics;
+}
+
+
+
+}
+
+

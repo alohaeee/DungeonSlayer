@@ -1,36 +1,27 @@
 #ifndef TEXTURE_CACHE_HPP
 #define TEXTURE_CACHE_HPP
 
+#include <string>
+
 #include <SDL_image.h>
 #include <SDL_render.h>
 #include <SDL_surface.h>
 
-#include "../fwd.hpp"
-#include "config.hpp"
-#include "core_data.hpp"
+#include "graphics.hpp"
 
 namespace ssecs::sdl
 {
 
-using TextureCache = ssecs::resources::cache<SDL_Texture, SDL_DestroyTexture>;
-
 /*! @brief Texture Loader struct. */
 struct TextureLoader
 {
-    static SDL_Texture *Sprite(const char *path)
+    static SDL_Texture *Sprite(std::string_view path)
     {
-        auto surface = IMG_Load(path);
-        if (!surface)
-        {
-            SDL_THROW();
-        }
-
-        auto texture = SDL_CreateTextureFromSurface(CoreData::Renderer(), surface);
+        auto texture = IMG_LoadTexture(Graphics::Renderer(), path.data());
         if (!texture)
         {
             SDL_THROW();
         }
-        SDL_FreeSurface(surface);
 
         return texture;
     }

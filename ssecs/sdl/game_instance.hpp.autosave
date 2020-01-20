@@ -1,0 +1,176 @@
+#ifndef GAME_INSTANCE_HPP
+#define GAME_INSTANCE_HPP
+
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
+
+#include "config.hpp"
+#include "core_data.hpp"
+#include "framerate.hpp"
+#include "loop_process.hpp"
+#include "timer.hpp"
+
+#include "events.hpp"
+#include "graphics.hpp"
+
+namespace ssecs::sdl
+{
+
+class GameHandler
+{
+    friend InstanceHandler;
+private:
+    GameHandler();
+    ~GameHandler();
+
+    void InputUpdate()
+    {
+        SDL_PollEvent(&events->m_event);
+
+        // Check for terminate.
+        if (events->Event().type == SDL_QUIT)
+        {
+            Quit();
+        }
+        if (events->Event().window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
+        {
+            graphics->DestroyLayers();
+            graphics->CreateLayers();
+        }
+
+        m_scene->InputUpdate();
+    }
+    void Update(const float dt)
+    {
+        m_scene->Update(dt);
+    }
+    void FixedUpdate()
+    {
+        m_scene->FixedUpdate();
+    }
+
+    void Render()
+    {
+        graphics->OnRenderStart();
+        
+        m_scene->Render();
+        
+        graphics->DrawLayers();
+        graphics->RenderPresent();
+    }
+
+    /*! @brief Destroy window and renderer.
+     * Close all subsystems. */
+    void Destroy()
+    {
+        delete graphics;
+        delete events;
+
+        TTF_Quit();
+        IMG_Quit();
+        SDL_Quit();
+    }
+
+public:
+    /*! @brief Initialization SDL's subsystems. */
+    void InitializeSubsystems()
+    {
+        if (m_hadInitialization)
+        {
+            return;
+        }
+        if (SDL_Init(SDL_INIT_EVERYTHING) == -1 || TTF_Init() == -1 || IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG) == 0)
+        {
+            SDL_THROW();
+        }
+        m_hadInitialization = true;
+    }
+
+    /**
+     * @brief Run the game loop.
+     * Check whether Initialization was invoked, existence of window and process.
+     * @note Calls Destroy after loop.
+     */
+    void Run()
+    {
+        m_isRunning = true;
+
+        while (m_isRunning)
+        {
+
+            frameRate->OnFrameStart();
+            //            if (m_isFrameSkip)
+            //            {
+            //                m_deltaTimeAccumulator += dt;
+            //                if (m_deltaTimeAccumulator > 10)
+            //                {
+            //                    // application probably lost control, fixed update would take too long
+            //                    m_deltaTimeAccumulator = 0;
+            //                }
+
+            //                const float targetFrameRateInv = 1.0f / m_targetFrameRate;
+            //                while (m_deltaTimeAccumulator >= targetFrameRateInv)
+            //                {
+            //                    FixedUpdate();
+            //                    m_deltaTimeAccumulator -= targetFrameRateInv;
+            //                }
+            //            }
+            //                        else
+            //                        {
+
+            FixedUpdate();
+
+            // Variable-timed update:
+            Update(frameRate->dt);
+
+            InputUpdate();
+
+            Render();
+        }
+
+        Destroy();
+    }
+    /*! @brief Request to quit from the game loop */
+    void Quit() noexcept
+    {
+        m_isRunning = false;
+    }
+
+    /*! @brief Return current game state. */
+    bool IsRunning() const noexcept
+    {
+        return m_isRunning;
+    }
+
+    /**
+     * @brief Return current scene.
+     */
+    const auto Scene() const noexcept
+    {
+        return m_scene.get();
+    }
+
+    /**
+     * @brief Create new process.
+     * @tparam Process Desired process.
+     * @tparam Args Process constructor argument
+     */
+    template <typename Scene, typename... Args>
+    auto CreateScene(Args... args)
+    {
+        m_scene = std::make_unique<Scene>(std::forward<Args>(args)...);
+    }
+private:
+    bool m_hadInitialization;
+    bool m_isRunning;
+    Graphics *graphics;
+    Events *events;
+    FrameRate *frameRate;
+    std::unique_ptr<BasicScene> m_scene = std::make_unique<BasicScene>();
+};
+
+
+} // namespace ssecs::sdl
+
+#endif // GAME_INSTANCE_HPP

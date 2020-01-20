@@ -1,0 +1,23 @@
+#ifndef EVENT_HANDLER_HPP
+#define EVENT_HANDLER_HPP
+
+#include <SDL_events.h>
+
+#include "fwd.hpp"
+
+namespace ssecs::sdl 
+{
+    class EventHandler
+    {
+        friend GameInstance;
+    public:
+        const SDL_Event& Event() const noexcept
+        {
+            return m_event;
+        }
+    private:
+        SDL_Event m_event;
+    };
+}
+
+#endif // EVENT_HANDLER_HPP
