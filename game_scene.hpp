@@ -28,10 +28,8 @@ public:
 
     void FixedUpdate() override
     {
-        if (CameraData::isFollowing)
-        {
-            CameraFollow();
-        }
+        CollisionDetection();
+        CameraFollow();
     }
     void Update([[maybe_unused]] const float dt) override
     {
@@ -40,8 +38,7 @@ public:
     }
     void InputUpdate() override
     {
-        if (!CameraData::isFollowing)
-            CameraUpdateDebug();
+        CameraUpdateDebug();
         PlayerMovement();
     }
     void Render() override
@@ -49,7 +46,6 @@ public:
         GridRender();
         SpriteRender();
         PositionDebug();
-        CollisionDetection();
     }
 
 private:

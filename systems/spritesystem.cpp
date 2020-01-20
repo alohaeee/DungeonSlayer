@@ -13,18 +13,13 @@ void SpriteRender()
         Sprite sprite = view.get<Sprite>(entity);
         Position position = view.get<Position>(entity);
 
-        auto screenPosition = camera.FromWorldToScreenView(position.position);
-        Vector2D temp{position.position.x() + sprite.rect.w * sprite.scale.x(),
-                      position.position.y() + sprite.rect.h * sprite.scale.y()};
+        SDL_FRect rect{position.position.x(), position.position.y(), sprite.rect.w * sprite.scale.x(),
+                       sprite.rect.h * sprite.scale.y()};
 
-        if (camera.Contains(position.position) || camera.Contains(temp))
+        if (camera.Contains(rect))
         {
-            SDL_Rect dst_rect;
+            SDL_Rect dst_rect = camera.FromWorldToScreenRect(rect);
 
-            dst_rect.w = static_cast<int>(sprite.rect.w * sprite.scale.x());
-            dst_rect.h = static_cast<int>(sprite.rect.h * sprite.scale.y());
-            dst_rect.x = static_cast<int>(screenPosition.x());
-            dst_rect.y = static_cast<int>(screenPosition.y()) - dst_rect.h;
             sdl::Graphics::RenderToLayer(sprite.layer, sprite.texture, &sprite.rect, &dst_rect,
                                          (sprite.isFliped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE));
         }

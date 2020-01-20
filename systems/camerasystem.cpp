@@ -11,38 +11,6 @@ void CameraCreate()
     camera.UpdateWindowSize(sdl::Graphics::Window());
 }
 
-void CameraUpdateDebug()
-{
-    if (!CameraData::isFollowing)
-    {
-        auto cameraView = registry.view<Camera>();
-        auto &activeCamera = cameraView.get(*cameraView.begin());
-        auto event = sdl::Events::Event();
-        if (event.key.type == SDL_KEYDOWN)
-        {
-            switch (event.key.keysym.sym)
-            {
-            case SDLK_UP:
-                activeCamera.position.Set(activeCamera.position.x(),
-                                          activeCamera.position.y() + activeCamera.viewRadius.y() / 10);
-                break;
-            case SDLK_DOWN:
-                activeCamera.position.Set(activeCamera.position.x(),
-                                          activeCamera.position.y() - activeCamera.viewRadius.y() / 10);
-                break;
-            case SDLK_LEFT:
-                activeCamera.position.Set(activeCamera.position.x() - activeCamera.viewRadius.x() / 10,
-                                          activeCamera.position.y());
-                break;
-            case SDLK_RIGHT:
-                activeCamera.position.Set(activeCamera.position.x() + activeCamera.viewRadius.x() / 10,
-                                          activeCamera.position.y());
-                break;
-            }
-        }
-    }
-}
-
 void CameraFollow()
 {
     if (CameraData::isFollowing)

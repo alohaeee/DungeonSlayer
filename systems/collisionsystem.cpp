@@ -34,25 +34,27 @@ void CollisionDetection()
                             world_tile.x = grid_pos.position.x() + i * world_tile.w;
                             if (AABB(world_rect, world_tile))
                             {
-                                std::cerr << "col" << std::endl;
-                                std::cerr << world_tile.x << "\t" << world_tile.y << std::endl;
-                                std::cerr << world_rect.x << "\t" << world_rect.y << std::endl;
+                                //                                std::cerr << "col" << std::endl;
+                                //                                std::cerr << world_tile.x << "\t" << world_tile.y <<
+                                //                                std::endl; std::cerr << world_rect.x << "\t" <<
+                                //                                world_rect.y << std::endl;
 
-                                auto test0 = activeCamera.FromWorldToScreenRect(world_tile);
+                                //                                auto test0 =
+                                //                                activeCamera.FromWorldToScreenRect(world_tile);
 
                                 //                                sdl::Graphics::SetDrawColor(0, 255, 0, 255);
-                                //                                sdl::Graphics::DrawRectToLayerF(4, &test0);
+                                //                                sdl::Graphics::DrawRectToLayer(4, &test0);
                                 //                                sdl::Graphics::SetDrawColor(255, 255, 0, 255);
                                 //                                auto test =
                                 //                                activeCamera.FromWorldToScreenRect(world_rect);
-                                //                                sdl::Graphics::DrawRectToLayerF(4, &test);
+                                //                                sdl::Graphics::DrawRectToLayer(4, &test);
                                 //                                sdl::Graphics::ResetDrawColor();
                             }
                         }
 
                         i++;
                     }
-                    j++;
+                    j--;
                 }
             }
         }

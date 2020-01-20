@@ -3,4 +3,6 @@
 
 void PositionDebug();
 
+void CameraUpdateDebug();
+
 #endif // DEBUGSYSTEM_HPP

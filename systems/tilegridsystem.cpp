@@ -15,7 +15,7 @@ void GridRender()
         auto screenRect = activeCamera.FromWorldToScreenRect(world_tile);
         SDL_Rect screenPosition = {screenRect.x, screenRect.y};
 
-        int j = grid.cell.size();
+        int j = grid.cell.size() - 1;
         for (const auto &row : grid.cell)
         {
             int i = 0;
@@ -32,12 +32,6 @@ void GridRender()
                                                      &screenRect);
                     }
 
-                    //                    if (activeCamera.Contains(screenRect))
-                    //                    {
-
-                    //                        sdl::Graphics::RenderToLayer(grid.layer, grid.tileSet->Texture(),
-                    //                        &(*grid.tileSet)[id - 1],
-                    //                                                     &screenRect);
                     //                        if (TileGrid::hasDebugDraw)
                     //                        {
                     //                            sdl::Graphics::SetDrawColor(0, 0, 255, 255);
