@@ -4,6 +4,7 @@
 #include <string>
 
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include <SDL_render.h>
 #include <SDL_surface.h>
 #include <SDL_ttf.h>
@@ -53,6 +54,16 @@ struct ResourceLoader
         }
         SDL_FreeSurface(surface);
         return texture;
+    }
+    static Mix_Music *Music(std::string_view path)
+    {
+        auto music = Mix_LoadMUS(path.data());
+        if (!music)
+        {
+            SDL_THROW();
+        }
+
+        return music;
     }
 };
 

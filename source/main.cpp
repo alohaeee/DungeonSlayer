@@ -18,6 +18,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char *argv[])
         game->Run();
 
         fontCache.reset();
+        musicCache.reset();
         scoreTable.Save("score.txt");
         Instances::DestroyGame();
 

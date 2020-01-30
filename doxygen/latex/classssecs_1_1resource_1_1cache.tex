@@ -1,0 +1,198 @@
+\hypertarget{classssecs_1_1resource_1_1cache}{}\doxysection{ssecs\+::resource\+::cache$<$ Resource, Eraser $>$ Class Template Reference}
+\label{classssecs_1_1resource_1_1cache}\index{ssecs::resource::cache$<$ Resource, Eraser $>$@{ssecs::resource::cache$<$ Resource, Eraser $>$}}
+
+
+Resource container.  
+
+
+
+
+{\ttfamily \#include $<$cache.\+hpp$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classssecs_1_1resource_1_1cache_a8d7b08c73e6446bd5ffede890fee4a9e}\label{classssecs_1_1resource_1_1cache_a8d7b08c73e6446bd5ffede890fee4a9e}} 
+using \mbox{\hyperlink{classssecs_1_1resource_1_1cache_a8d7b08c73e6446bd5ffede890fee4a9e}{size\+\_\+type}} = std\+::size\+\_\+t
+\begin{DoxyCompactList}\small\item\em Unsigned integer type. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classssecs_1_1resource_1_1cache_af9a409a3fd25a39d48fe3e30ab633d97}\label{classssecs_1_1resource_1_1cache_af9a409a3fd25a39d48fe3e30ab633d97}} 
+using \mbox{\hyperlink{classssecs_1_1resource_1_1cache_af9a409a3fd25a39d48fe3e30ab633d97}{resource\+\_\+type}} = Resource
+\begin{DoxyCompactList}\small\item\em Type of resources managed by a cache. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classssecs_1_1resource_1_1cache_ac7e5b1cdc492397f6b855be984d9155f}\label{classssecs_1_1resource_1_1cache_ac7e5b1cdc492397f6b855be984d9155f}} 
+using \mbox{\hyperlink{classssecs_1_1resource_1_1cache_ac7e5b1cdc492397f6b855be984d9155f}{id\+\_\+type}} = std\+::string
+\begin{DoxyCompactList}\small\item\em Unique identifier type for resources. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classssecs_1_1resource_1_1cache_a61eb9c198d24f4f0f963c0aa0cd4b475}\label{classssecs_1_1resource_1_1cache_a61eb9c198d24f4f0f963c0aa0cd4b475}} 
+using \mbox{\hyperlink{classssecs_1_1resource_1_1cache_a61eb9c198d24f4f0f963c0aa0cd4b475}{eraser\+\_\+type}} = void($\ast$)(\mbox{\hyperlink{classssecs_1_1resource_1_1cache_af9a409a3fd25a39d48fe3e30ab633d97}{resource\+\_\+type}})
+\begin{DoxyCompactList}\small\item\em Erase function type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classssecs_1_1resource_1_1cache_a53317f86a7aad5222afe36b57c36a559}\label{classssecs_1_1resource_1_1cache_a53317f86a7aad5222afe36b57c36a559}} 
+\mbox{\hyperlink{classssecs_1_1resource_1_1cache_a53317f86a7aad5222afe36b57c36a559}{cache}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classssecs_1_1resource_1_1cache_a64ac93dd13bb80def67472520f4fdd93}\label{classssecs_1_1resource_1_1cache_a64ac93dd13bb80def67472520f4fdd93}} 
+\mbox{\hyperlink{classssecs_1_1resource_1_1cache_a64ac93dd13bb80def67472520f4fdd93}{$\sim$cache}} ()
+\begin{DoxyCompactList}\small\item\em Invoke reset. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classssecs_1_1resource_1_1cache_a61eb9c198d24f4f0f963c0aa0cd4b475}{eraser\+\_\+type}} \mbox{\hyperlink{classssecs_1_1resource_1_1cache_a065d454717767114d1d3fe5c05c1d422}{get\+\_\+eraser}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Get erase templated function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classssecs_1_1resource_1_1cache_a8d7b08c73e6446bd5ffede890fee4a9e}{size\+\_\+type}} \mbox{\hyperlink{classssecs_1_1resource_1_1cache_a9aeebc01ba70e5bcae7c8a19334d9d66}{size}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Return count of resources. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classssecs_1_1resource_1_1cache_ae2fff70d2eb32451f9873f84c442bfd6}{empty}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns true if a cache contains no resources, false otherwise. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classssecs_1_1resource_1_1cache_a1486f75d54b36aa64ad379d5f479850d}\label{classssecs_1_1resource_1_1cache_a1486f75d54b36aa64ad379d5f479850d}} 
+void \mbox{\hyperlink{classssecs_1_1resource_1_1cache_a1486f75d54b36aa64ad379d5f479850d}{reset}} ()
+\begin{DoxyCompactList}\small\item\em Reset cache. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classssecs_1_1resource_1_1cache_af9a409a3fd25a39d48fe3e30ab633d97}{resource\+\_\+type}} \mbox{\hyperlink{classssecs_1_1resource_1_1cache_a3a0449275eb8ff64f714d8f7da8aca35}{load}} (const \mbox{\hyperlink{classssecs_1_1resource_1_1cache_ac7e5b1cdc492397f6b855be984d9155f}{id\+\_\+type}} id, \mbox{\hyperlink{classssecs_1_1resource_1_1cache_af9a409a3fd25a39d48fe3e30ab633d97}{resource\+\_\+type}} instance)
+\begin{DoxyCompactList}\small\item\em Load instance in cache. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classssecs_1_1resource_1_1cache_af9a409a3fd25a39d48fe3e30ab633d97}{resource\+\_\+type}} \mbox{\hyperlink{classssecs_1_1resource_1_1cache_ac0a761d4f8ef5d81d0bc787db3e47f8e}{resource}} (const \mbox{\hyperlink{classssecs_1_1resource_1_1cache_ac7e5b1cdc492397f6b855be984d9155f}{id\+\_\+type}} id)
+\begin{DoxyCompactList}\small\item\em Get resource by id. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classssecs_1_1resource_1_1cache_afde2de4c3d84e2feca0fa550f434d613}{has}} (const \mbox{\hyperlink{classssecs_1_1resource_1_1cache_ac7e5b1cdc492397f6b855be984d9155f}{id\+\_\+type}} id) const noexcept
+\begin{DoxyCompactList}\small\item\em Checks if an id exist in cache. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classssecs_1_1resource_1_1cache_a7bc16615201eb85edba18c7a73335d93}{erase}} (\mbox{\hyperlink{classssecs_1_1resource_1_1cache_ac7e5b1cdc492397f6b855be984d9155f}{id\+\_\+type}} id)
+\begin{DoxyCompactList}\small\item\em Erase resource from cache. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Resource, void($\ast$)(\+Resource) Eraser = nullptr$>$\newline
+class ssecs\+::resource\+::cache$<$ Resource, Eraser $>$}
+
+Resource container. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Resourcs} & Resource type. \\
+\hline
+{\em Eraser} & Function invokable with erasing. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classssecs_1_1resource_1_1cache_ae2fff70d2eb32451f9873f84c442bfd6}\label{classssecs_1_1resource_1_1cache_ae2fff70d2eb32451f9873f84c442bfd6}} 
+\index{ssecs::resource::cache$<$ Resource, Eraser $>$@{ssecs::resource::cache$<$ Resource, Eraser $>$}!empty@{empty}}
+\index{empty@{empty}!ssecs::resource::cache$<$ Resource, Eraser $>$@{ssecs::resource::cache$<$ Resource, Eraser $>$}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily template$<$typename Resource , void($\ast$)(\+Resource) Eraser = nullptr$>$ \\
+bool \mbox{\hyperlink{classssecs_1_1resource_1_1cache}{ssecs\+::resource\+::cache}}$<$ Resource, Eraser $>$\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns true if a cache contains no resources, false otherwise. 
+
+\begin{DoxyReturn}{Returns}
+True if the cache contains no resources, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classssecs_1_1resource_1_1cache_a7bc16615201eb85edba18c7a73335d93}\label{classssecs_1_1resource_1_1cache_a7bc16615201eb85edba18c7a73335d93}} 
+\index{ssecs::resource::cache$<$ Resource, Eraser $>$@{ssecs::resource::cache$<$ Resource, Eraser $>$}!erase@{erase}}
+\index{erase@{erase}!ssecs::resource::cache$<$ Resource, Eraser $>$@{ssecs::resource::cache$<$ Resource, Eraser $>$}}
+\doxysubsubsection{\texorpdfstring{erase()}{erase()}}
+{\footnotesize\ttfamily template$<$typename Resource , void($\ast$)(\+Resource) Eraser = nullptr$>$ \\
+void \mbox{\hyperlink{classssecs_1_1resource_1_1cache}{ssecs\+::resource\+::cache}}$<$ Resource, Eraser $>$\+::erase (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classssecs_1_1resource_1_1cache_ac7e5b1cdc492397f6b855be984d9155f}{id\+\_\+type}}}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Erase resource from cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Valid id type. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classssecs_1_1resource_1_1cache_a065d454717767114d1d3fe5c05c1d422}\label{classssecs_1_1resource_1_1cache_a065d454717767114d1d3fe5c05c1d422}} 
+\index{ssecs::resource::cache$<$ Resource, Eraser $>$@{ssecs::resource::cache$<$ Resource, Eraser $>$}!get\_eraser@{get\_eraser}}
+\index{get\_eraser@{get\_eraser}!ssecs::resource::cache$<$ Resource, Eraser $>$@{ssecs::resource::cache$<$ Resource, Eraser $>$}}
+\doxysubsubsection{\texorpdfstring{get\_eraser()}{get\_eraser()}}
+{\footnotesize\ttfamily template$<$typename Resource , void($\ast$)(\+Resource) Eraser = nullptr$>$ \\
+const \mbox{\hyperlink{classssecs_1_1resource_1_1cache_a61eb9c198d24f4f0f963c0aa0cd4b475}{eraser\+\_\+type}} \mbox{\hyperlink{classssecs_1_1resource_1_1cache}{ssecs\+::resource\+::cache}}$<$ Resource, Eraser $>$\+::get\+\_\+eraser (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Get erase templated function. 
+
+\begin{DoxyReturn}{Returns}
+Pointer to templated function. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classssecs_1_1resource_1_1cache_afde2de4c3d84e2feca0fa550f434d613}\label{classssecs_1_1resource_1_1cache_afde2de4c3d84e2feca0fa550f434d613}} 
+\index{ssecs::resource::cache$<$ Resource, Eraser $>$@{ssecs::resource::cache$<$ Resource, Eraser $>$}!has@{has}}
+\index{has@{has}!ssecs::resource::cache$<$ Resource, Eraser $>$@{ssecs::resource::cache$<$ Resource, Eraser $>$}}
+\doxysubsubsection{\texorpdfstring{has()}{has()}}
+{\footnotesize\ttfamily template$<$typename Resource , void($\ast$)(\+Resource) Eraser = nullptr$>$ \\
+bool \mbox{\hyperlink{classssecs_1_1resource_1_1cache}{ssecs\+::resource\+::cache}}$<$ Resource, Eraser $>$\+::has (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classssecs_1_1resource_1_1cache_ac7e5b1cdc492397f6b855be984d9155f}{id\+\_\+type}}}]{id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Checks if an id exist in cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Valid id type. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if exist, otherwise false. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classssecs_1_1resource_1_1cache_a3a0449275eb8ff64f714d8f7da8aca35}\label{classssecs_1_1resource_1_1cache_a3a0449275eb8ff64f714d8f7da8aca35}} 
+\index{ssecs::resource::cache$<$ Resource, Eraser $>$@{ssecs::resource::cache$<$ Resource, Eraser $>$}!load@{load}}
+\index{load@{load}!ssecs::resource::cache$<$ Resource, Eraser $>$@{ssecs::resource::cache$<$ Resource, Eraser $>$}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily template$<$typename Resource , void($\ast$)(\+Resource) Eraser = nullptr$>$ \\
+\mbox{\hyperlink{classssecs_1_1resource_1_1cache_af9a409a3fd25a39d48fe3e30ab633d97}{resource\+\_\+type}} \mbox{\hyperlink{classssecs_1_1resource_1_1cache}{ssecs\+::resource\+::cache}}$<$ Resource, Eraser $>$\+::load (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classssecs_1_1resource_1_1cache_ac7e5b1cdc492397f6b855be984d9155f}{id\+\_\+type}}}]{id,  }\item[{\mbox{\hyperlink{classssecs_1_1resource_1_1cache_af9a409a3fd25a39d48fe3e30ab633d97}{resource\+\_\+type}}}]{instance }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Load instance in cache. 
+
+\begin{DoxyNote}{Note}
+If such id already exist in cache, resource will replace with an instance. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Valid id type. \\
+\hline
+{\em instance} & Valid resource. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Loaded in cache resource. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classssecs_1_1resource_1_1cache_ac0a761d4f8ef5d81d0bc787db3e47f8e}\label{classssecs_1_1resource_1_1cache_ac0a761d4f8ef5d81d0bc787db3e47f8e}} 
+\index{ssecs::resource::cache$<$ Resource, Eraser $>$@{ssecs::resource::cache$<$ Resource, Eraser $>$}!resource@{resource}}
+\index{resource@{resource}!ssecs::resource::cache$<$ Resource, Eraser $>$@{ssecs::resource::cache$<$ Resource, Eraser $>$}}
+\doxysubsubsection{\texorpdfstring{resource()}{resource()}}
+{\footnotesize\ttfamily template$<$typename Resource , void($\ast$)(\+Resource) Eraser = nullptr$>$ \\
+\mbox{\hyperlink{classssecs_1_1resource_1_1cache_af9a409a3fd25a39d48fe3e30ab633d97}{resource\+\_\+type}} \mbox{\hyperlink{classssecs_1_1resource_1_1cache}{ssecs\+::resource\+::cache}}$<$ Resource, Eraser $>$\+::resource (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classssecs_1_1resource_1_1cache_ac7e5b1cdc492397f6b855be984d9155f}{id\+\_\+type}}}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get resource by id. 
+
+\begin{DoxyWarning}{Warning}
+Throw exception if such id not exist. 
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Valid id type. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Resource in success. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classssecs_1_1resource_1_1cache_a9aeebc01ba70e5bcae7c8a19334d9d66}\label{classssecs_1_1resource_1_1cache_a9aeebc01ba70e5bcae7c8a19334d9d66}} 
+\index{ssecs::resource::cache$<$ Resource, Eraser $>$@{ssecs::resource::cache$<$ Resource, Eraser $>$}!size@{size}}
+\index{size@{size}!ssecs::resource::cache$<$ Resource, Eraser $>$@{ssecs::resource::cache$<$ Resource, Eraser $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$typename Resource , void($\ast$)(\+Resource) Eraser = nullptr$>$ \\
+\mbox{\hyperlink{classssecs_1_1resource_1_1cache_a8d7b08c73e6446bd5ffede890fee4a9e}{size\+\_\+type}} \mbox{\hyperlink{classssecs_1_1resource_1_1cache}{ssecs\+::resource\+::cache}}$<$ Resource, Eraser $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Return count of resources. 
+
+\begin{DoxyReturn}{Returns}
+Size of iternal map. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+resource/cache.\+hpp\end{DoxyCompactItemize}

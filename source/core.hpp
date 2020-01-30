@@ -23,6 +23,7 @@ using namespace component;
 inline entt::registry registry{};
 inline sdl::TextureCache textureCache;
 inline sdl::FontCache fontCache;
+inline sdl::MusicCache musicCache;
 inline TileSet tileset;
 inline TileSet spriteSheet;
 inline ScoreTable scoreTable;

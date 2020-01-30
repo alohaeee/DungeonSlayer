@@ -50,7 +50,7 @@ void GridRender()
 void GridCreate()
 {
     pugi::xml_document map;
-    auto result = map.load_file("map_test.tmx");
+    auto result = map.load_file("resources/tiled_files/map_test.tmx");
     if (!result)
     {
         FAST_THROW(result.description());

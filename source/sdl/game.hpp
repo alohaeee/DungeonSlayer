@@ -3,6 +3,7 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include <SDL_ttf.h>
 
 #include "config.hpp"
@@ -70,6 +71,7 @@ private:
     {
         Graphics::DestroyData();
 
+        Mix_Quit();
         TTF_Quit();
         IMG_Quit();
         SDL_Quit();
@@ -83,7 +85,8 @@ public:
         {
             return;
         }
-        if (SDL_Init(SDL_INIT_EVERYTHING) == -1 || TTF_Init() == -1 || IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG) == 0)
+        if (SDL_Init(SDL_INIT_EVERYTHING) == -1 || TTF_Init() == -1 || IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG) == 0 ||
+            Mix_Init(MIX_INIT_MP3) == 0)
         {
             SDL_THROW();
         }

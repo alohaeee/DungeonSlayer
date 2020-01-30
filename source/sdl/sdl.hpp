@@ -7,7 +7,7 @@
 #include "graphics.hpp"
 #include "instances.hpp"
 #include "scene.hpp"
-#include "texture_loader.hpp"
+#include "resource_loader.hpp"
 #include "timer.hpp"
 
 #endif // SDL_HPP

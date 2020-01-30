@@ -50,7 +50,7 @@ struct ScoreTable
     {
         std::ifstream file;
         file.open(path.data());
-        // file.open(, std::fstream::in | std::fstream::out);
+
         if (!file.is_open())
         {
             FAST_THROW("Could't open file.");

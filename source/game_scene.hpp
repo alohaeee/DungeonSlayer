@@ -10,7 +10,7 @@
 #include "xml/pugixml.hpp"
 #include <random>
 
-constexpr const auto tileid = "resource/tileset/";
+constexpr const auto tileid = "tileset";
 constexpr const auto spriteid = "spritesheet";
 class GameScene : public sdl::BasicScene
 {
@@ -26,23 +26,26 @@ public:
         sink.connect<&EnemyCharging>();
         sink.connect<&OnHit>();
 
-        std::filesystem::directory_entry directory;
+        if (Mix_OpenAudio(44110, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+        {
+            SDL_THROW();
+        }
+        auto music = musicCache.load("main", sdl::ResourceLoader::Music("resources/mix/main.mp3"));
+        Mix_PlayMusic(music, -1);
+        textureCache.load(tileid, sdl::ResourceLoader::Sprite("resources/sprites/tilemap.png"));
+        textureCache.load(spriteid, sdl::ResourceLoader::Sprite("resources/sprites/spritesheet.png"));
 
-        std::cerr << std::filesystem::current_path() << std::endl;
-        textureCache.load(tileid, sdl::ResourceLoader::Sprite("resource/sprites/tilemap.png"));
-        textureCache.load(spriteid, sdl::ResourceLoader::Sprite("resource/sprites/spritesheet.png"));
-
-        fontCache.load("font23", sdl::ResourceLoader::Font("dpcomic"
+        fontCache.load("font23", sdl::ResourceLoader::Font("resources/fonts/dpcomic"
                                                            ".ttf",
                                                            23));
-        fontCache.load("font35", sdl::ResourceLoader::Font("dpcomic"
+        fontCache.load("font35", sdl::ResourceLoader::Font("resources/fonts/dpcomic"
                                                            ".ttf",
                                                            35));
 
-        scoreTable.Open("score.txt");
+        scoreTable.Open("resources/score.txt");
 
-        spriteSheet.Load("sprite.tsx", textureCache.resource(spriteid));
-        tileset.Load("tile.tsx", textureCache.resource(tileid));
+        spriteSheet.Load("resources/tiled_files/sprite.tsx", textureCache.resource(spriteid));
+        tileset.Load("resources/tiled_files/tile.tsx", textureCache.resource(tileid));
         CameraCreate();
         GridCreate();
         PlayerCreate();

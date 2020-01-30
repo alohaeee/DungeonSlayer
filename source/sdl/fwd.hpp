@@ -2,6 +2,7 @@
 #define SDL_FWD_HPP
 
 #include "../fwd.hpp"
+#include <SDL_mixer.h>
 #include <SDL_render.h>
 #include <SDL_ttf.h>
 
@@ -27,6 +28,8 @@ class Instances;
 using TextureCache = ssecs::resource::cache<SDL_Texture *, SDL_DestroyTexture>;
 /*! @brief Resources cache for fonts. */
 using FontCache = ssecs::resource::cache<TTF_Font *, TTF_CloseFont>;
+/*! @brief Resources cache for audio. */
+using MusicCache = ssecs::resource::cache<Mix_Music *, Mix_FreeMusic>;
 
 } // namespace ssecs::sdl
 
